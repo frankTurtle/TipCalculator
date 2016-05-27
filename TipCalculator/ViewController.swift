@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalWithTipLabel: UILabel!
     
+    var tipValue:Double? //............................ variable to hold the tip value and make it optional
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,23 @@ class ViewController: UIViewController {
     }
 
     @IBAction func convertButtonPressed(sender: UIButton) {
+        billTextField.resignFirstResponder() //.................. hide keyboard
+        
+        print( billTextField.text! ) //.......................... optional
+        
+        if( billTextField.text! != "" && billTextField.text != nil ){
+            if( tipValue != nil && tipValue! != 0 ){
+                tipLabel.text = "\(tipValue!)" //....................... updates the label with the unwrapped optional
+                
+                let totalWithTip = tipValue! + Double( billTextField.text! )!
+                totalWithTipLabel.text = "\(totalWithTip)"
+            }
+            else{
+                tipLabel.text = "No Tip"
+                totalWithTipLabel.text = "\(billTextField.text!)"
+            }
+            
+        }
     }
 
     @IBAction func implicitlyConvertButton(sender: UIButton) {
