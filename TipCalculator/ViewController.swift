@@ -48,6 +48,27 @@ class ViewController: UIViewController {
     }
 
     @IBAction func implicitlyConvertButton(sender: UIButton) {
+        billTextField.resignFirstResponder() //.................. hide keyboard
+        
+        tipValue = 15
+        
+        let total = Double( billTextField.text! )
+        
+        if let unwrappedTotal = total {
+            if let tipValueToUse = tipValue {
+                tipLabel.text = "\(tipValueToUse)"
+                
+                let amountToPay = unwrappedTotal + tipValueToUse
+                totalWithTipLabel.text = "\(amountToPay)"
+            }
+            else{
+                tipLabel.text = "No Tip"
+                totalWithTipLabel.text = "\(unwrappedTotal)"
+            }
+        }
+        else{
+            print( "Optional is nil" )
+        }
     }
 }
 
